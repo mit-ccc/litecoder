@@ -8,6 +8,7 @@ INSTALL_REQUIRES = [
     "cached_property",
     "sqlalchemy",
     "download",
+    "PyYAML",
 ]
 
 CLASSIFIERS = [
