@@ -1,52 +1,35 @@
-
-
 from setuptools import setup, find_packages
 
 
-PACKAGE_DATA = {
-    'litecoder': [
-        'data/*.db',
-        'data/*.yml',
-        'data/*.p',
-    ]
-}
-
 INSTALL_REQUIRES = [
-    'numpy',
-    'scipy',
-    'SQLAlchemy',
-    'us',
-    'boltons',
-    'cached-property',
-    'tqdm',
-    'attrs',
-    'ujson',
-    'python-box',
-    'PyYAML',
+    "marisa-trie>=0.7.5",
+    "ujson",
+    "tqdm",
+    "cached_property",
+    "sqlalchemy",
+    "download",
 ]
 
 CLASSIFIERS = [
-    'Development Status :: 3 - Alpha',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: MIT License',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3.5',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
 ]
 
 
 setup(
-    name='litecoder',
-    version='0.2.0',
-    description='US city + state geocoding.',
-    url='https://github.com/davidmcclure/litecoder',
-    license='MIT',
-    author='David McClure',
-    author_email='dclure@mit.edu',
+    name="litecoder",
+    version="0.3.0",
+    description="US city + state geocoding.",
+    url="https://github.com/social-machines/litecoder",
+    license="MIT",
+    author="Lab for Social Machines, MIT Media Lab",
+    author_email="wesc@media.mit.edu",
     packages=find_packages(),
-    include_package_data=True,
     classifiers=CLASSIFIERS,
     install_requires=INSTALL_REQUIRES,
-    package_data=PACKAGE_DATA,
 )
