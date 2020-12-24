@@ -9,6 +9,7 @@ INSTALL_REQUIRES = [
     "sqlalchemy",
     "download",
     "PyYAML",
+    "us",
 ]
 
 CLASSIFIERS = [
