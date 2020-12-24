@@ -1,6 +1,7 @@
 
 
 import re
+import os
 import marisa_trie
 import ujson as json
 
@@ -8,6 +9,7 @@ from tqdm import tqdm
 from collections import defaultdict
 from itertools import product
 from cached_property import cached_property
+from download import download
 from box import Box
 
 from sqlalchemy.inspection import inspect
@@ -24,6 +26,9 @@ USA_NAMES = (
     'US',
     'America',
 )
+
+US_STATE_DB_URL = "https://github.com/social-machines/litecoder/releases/download/v0.3.0/us-states.marisa.tar.gz"
+US_CITY_DB_URL = "https://github.com/social-machines/litecoder/releases/download/v0.3.0/us-cities.marisa.tar.gz"
 
 
 def keyify(text):
@@ -188,6 +193,8 @@ class Index:
 class USCityIndex(Index):
 
     def load(self, path=US_CITY_PATH, mmap=False):
+        if not os.path.isfile(US_CITY_PATH):
+            download(US_CITY_DB_URL, US_CITY_PATH, kind="tar.gz", progressbar=True)
         return super().load(path, mmap)
 
     def __init__(self, bare_name_blocklist=None):
@@ -227,6 +234,8 @@ class USCityIndex(Index):
 class USStateIndex(Index):
 
     def load(self, path=US_STATE_PATH, mmap=False):
+        if not os.path.isfile(US_STATE_PATH):
+            download(US_STATE_DB_URL, US_STATE_PATH, kind="tar.gz", progressbar=True)
         return super().load(path, mmap)
 
     def build(self):
