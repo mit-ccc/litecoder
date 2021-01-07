@@ -8,11 +8,7 @@ import ujson as json
 from tqdm import tqdm
 from collections import defaultdict
 from itertools import product
-from cached_property import cached_property
 from download import download
-from box import Box
-
-from sqlalchemy.inspection import inspect
 
 from . import logger, US_CITY_PATH, US_STATE_PATH
 from .models import WOFRegion, WOFLocality
