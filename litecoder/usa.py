@@ -23,8 +23,8 @@ USA_NAMES = (
     'America',
 )
 
-US_STATE_DB_URL = "https://github.com/social-machines/litecoder/releases/download/v0.3.0/us-states.marisa.tar.gz"
-US_CITY_DB_URL = "https://github.com/social-machines/litecoder/releases/download/v0.3.0/us-cities.marisa.tar.gz"
+US_STATE_DB_URL = "https://github.com/Sheshank-s/litecoder/releases/download/v1.0/us-states.marisa"
+US_CITY_DB_URL = "https://github.com/Sheshank-s/litecoder/releases/download/v1.0/us-cities.marisa"
 
 
 def keyify(text):
@@ -190,7 +190,7 @@ class USCityIndex(Index):
 
     def load(self, path=US_CITY_PATH, mmap=False):
         if not os.path.isfile(US_CITY_PATH):
-            download(US_CITY_DB_URL, US_CITY_PATH, kind="tar.gz", progressbar=True)
+            download(US_CITY_DB_URL, US_CITY_PATH, progressbar=True, verbose=False)
         return super().load(path, mmap)
 
     def __init__(self, bare_name_blocklist=None):
@@ -231,7 +231,7 @@ class USStateIndex(Index):
 
     def load(self, path=US_STATE_PATH, mmap=False):
         if not os.path.isfile(US_STATE_PATH):
-            download(US_STATE_DB_URL, US_STATE_PATH, kind="tar.gz", progressbar=True)
+            download(US_STATE_DB_URL, US_STATE_PATH, progressbar=True, verbose=False)
         return super().load(path, mmap)
 
     def build(self):
