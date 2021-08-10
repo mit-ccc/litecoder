@@ -111,6 +111,28 @@ idx['Massachusetts, USA']
 >> [StateMatch<Massachusetts, United States, wof:85688645>]
 ```
 
+## mmap
+
+Litecoder supports a memory mapped index load:
+
+```python
+from litecoder.usa import USCityIndex
+
+idx = USCityIndex()
+idx.load(mmap=True)
+```
+
+When enabled, the index will share memory with any other index in any
+other process on the machine also loaded with `mmap=True`. This is
+useful in parallel processing contexts where you may want a litecoder
+instances per process, but the sum total of the memory usage would
+exceed the machine resources. In addition to the memory efficiency,
+memory mapping a file is faster than `mmap=False`, which is the
+default and copies the entire database into memory. The trade-off is
+that initial accesses to the database with `mmap=True` may be slower
+as the operating system lazily pages data in as needed.
+
+
 ## Metadata
 
 The city and state indexes return "match" objects that hold all metadata associated with the location, as well as denormalized copies of parent entities.
