@@ -28,10 +28,10 @@ CLASSIFIERS = [
 
 setup(
     name="litecoder",
-    version="0.3.0",
+    version="0.3.2",
     description="US city + state geocoding.",
     url="https://github.com/social-machines/litecoder",
-    download_url="https://github.com/social-machines/litecoder/archive/v0.3.0.tar.gz",
+    download_url="https://github.com/social-machines/litecoder/archive/v0.3.2.tar.gz",
     license="MIT",
     author="Lab for Social Machines, MIT Media Lab",
     author_email="wesc@media.mit.edu",
