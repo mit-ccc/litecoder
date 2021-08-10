@@ -56,8 +56,8 @@ pip install litecoder
 from litecoder.usa import USCityIndex
 
 # Load the pre-built index.
-idx = USCityIndex.load()
->> USCityIndex<630774 keys, 53219 entities>
+idx = USCityIndex()
+idx.load()
 
 # Basic city, state, country.
 idx['Boston, Massachusetts']
@@ -102,8 +102,8 @@ idx['Nueva York']
 from litecoder.usa import USStateIndex
 
 # Load the pre-built index.
-idx = USStateIndex.load()
->> USStateIndex<561 keys, 51 entities>
+idx = USStateIndex()
+idx.load()
 
 # Basic state, country.
 idx['Massachusetts']
@@ -113,31 +113,32 @@ idx['Massachusetts, USA']
 
 ## Metadata
 
-The city and state indexes return "match" objects that act as proxies for the underlying data in SQLite. These objects store all metadata associated with the location, as well as denormalized copies of parent entities.
+The city and state indexes return "match" objects that hold all metadata associated with the location, as well as denormalized copies of parent entities.
 
 ### US cities
 
 ```python
-idx = USCityIndex.load()
+idx = USCityIndex()
+idx.load()
 
 sf = idx['San Francisco'][0]
 
-sf.data.name
+sf['name']
 >> 'San Francisco'
 
-sf.data.population
+sf['population']
 >> 805235
 
-sf.data.latitude
+sf['latitude']
 >> 37.759715
 
-sf.data.longitude
+sf['longitude']
 >> -122.693976
 
-sf.data.region.name_abbr
+sf['region'].['name_abbr']
 >> 'CA'
 
-sf.data.to_dict()
+sf
 >>
 {'area_m2': 600307527.980684,
  'country_iso': 'US',
@@ -186,32 +187,24 @@ sf.data.to_dict()
  'wof_region_id': 85688637}
 ```
 
-Or, use the `db_row` attribute, which (lazily) queries the underlying SQLite database.
-
-```python
-sf.db_row
->> WOFLocality<San Francisco, California, United States, wof:85922583>
-```
-
-This usually shouldn't be needed, since a copy of the metadata is stored under `data`. This means that Litecoder can be used in parallelized / distributed environments where highly concurrent SQLite queries would be problematic. For example, in a Spark job, a Litecoder index can be serialized and shipped to workers just like any other variable.
-
 ### US states
 
 ```python
-idx = USStateIndex.load()
+idx = USStateIndex()
+idx.load()
 
 ca = idx['California'][0]
 
-ca.data.name
+ca['name']
 >> 'California'
 
-ca.data.population
+ca['population']
 >> 37253956
 
-ca.data.area_m2
+ca['area_m2']
 >> 423822167986.13293
 
-ca.data.to_dict()
+ca
 >>
 {'area_m2': 423822167986.13293,
  'country_iso': 'US',
@@ -231,8 +224,4 @@ ca.data.to_dict()
  'wof_continent_id': 102191575,
  'wof_country_id': 85633793,
  'wof_id': 85688637}
-
-# Generates SQLite query.
-ca.db_row
->> WOFRegion<California, United States, wof:85688637>
 ```
